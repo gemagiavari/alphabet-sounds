@@ -39,8 +39,6 @@ window.addEventListener("keydown", function (event) {
     if (buttons[i].key === key) {
       var audio = new Audio(buttons[i].sound);
 
-      audio.playbackRate = 1.25; // Add the speed
-
       audio.play();
 
       buttonAnimation(key);
@@ -53,8 +51,6 @@ window.addEventListener("keydown", function (event) {
 function handleClick(sound, i) {
   return function () {
     var audio = new Audio(sound);
-
-    audio.playbackRate = 1.25; // Add the speed
 
     audio.play();
     buttonAnimation(buttons[i].key);
