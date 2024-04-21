@@ -29,7 +29,7 @@ var buttons = [
 
 for (var i = 0; i < buttons.length; i++) {
   var button = document.querySelector(buttons[i].class);
-  button.addEventListener("click", handleClick(buttons[i].sound));
+  button.addEventListener("click", handleClick(buttons[i].sound, i));
 }
 
 window.addEventListener("keydown", function (event) {
@@ -38,14 +38,27 @@ window.addEventListener("keydown", function (event) {
     if (buttons[i].key === key) {
       var audio = new Audio(buttons[i].sound);
       audio.play();
+
+      buttonAnimation(key);
+
       break;
     }
   }
 });
 
-function handleClick(sound) {
+function handleClick(sound, i) {
   return function () {
     var audio = new Audio(sound);
     audio.play();
+
+    buttonAnimation(buttons[i].key);
   };
+}
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
